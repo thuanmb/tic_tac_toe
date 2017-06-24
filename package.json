@@ -1,0 +1,12 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "Tic Tac Toe game",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/thuanmb/tic_tac_toe.git",
+    "type": "git"
+  },
+  "author": "Thuan Bui",
+  "license": "MIT"
+}
