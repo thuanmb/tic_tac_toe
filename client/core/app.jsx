@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => (
-  <div style={{textAlign: 'center'}}>
+  <div className="tc">
     <h1>Tic Tac Toe</h1>
   </div>
 );

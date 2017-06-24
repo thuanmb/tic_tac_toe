@@ -14,7 +14,7 @@ module.exports = {
   entry: './client/index.jsx',
   output: {
     path: path.resolve('dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -29,10 +29,26 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
       },
-    ]
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader",
+        }, {
+          loader: "css-loader",
+        }, {
+          loader: "sass-loader",
+        }]
+      },
+    ],
   },
   plugins: [
     HtmlWebpackPluginConfig,
-    DashboardPluginConfig
-  ]
+    DashboardPluginConfig,
+  ],
+  resolve: {
+    alias: {
+      NodeModulesPath: path.resolve(__dirname, './node_modules'),
+    },
+    extensions: ['.js', '.jsx', '.scss'],
+  }
 };
