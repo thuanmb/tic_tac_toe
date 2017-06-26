@@ -1,0 +1,10 @@
+@import '~NodeModulesPath/tachyons-sass/tachyons';
+
+.app-bar {
+  background-color: $blue !important;
+}
+
+.game-container {
+  top: 64px;
+  bottom: 0;
+}
