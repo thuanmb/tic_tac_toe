@@ -7,7 +7,7 @@ import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router';
 import Board from './board';
-import { createNewGame } from './actions';
+import { createNewGame, playAction } from './actions';
 
 import './styles';
 
@@ -15,8 +15,8 @@ class Game extends Component {
   static propTypes = {
     boardSize: PropTypes.number.isRequired,
     gameBoardMatrix: PropTypes.array.isRequired,
-    currentTurn: PropTypes.number.isRequired,
     createNewGameHandler: PropTypes.func.isRequired,
+    playActionHandler: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -37,8 +37,12 @@ class Game extends Component {
     });
   }
 
-  handleCellClick() {
+  handleCellClick(rowIndex, colIndex) {
+    const { playActionHandler, gameBoardMatrix } = this.props;
 
+    if (gameBoardMatrix[rowIndex][colIndex] === -1) {
+      playActionHandler(rowIndex, colIndex);
+    }
   }
 
   render() {
@@ -81,13 +85,13 @@ class Game extends Component {
 
 const mapStateToProps = ({
   settings: { size: boardSize },
-  game: { boardMatrix: gameBoardMatrix, currentTurn },
+  game: { boardMatrix: gameBoardMatrix },
 }) => ({
   boardSize,
   gameBoardMatrix,
-  currentTurn,
 });
 
 export default connect(mapStateToProps, {
   createNewGameHandler: createNewGame,
+  playActionHandler: playAction,
 })(Game);
