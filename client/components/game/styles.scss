@@ -1,10 +1,37 @@
 @import '~NodeModulesPath/tachyons-sass/tachyons';
 
+$menu_height: 64px;
+
 .app-bar {
   background-color: $blue !important;
 }
 
 .game-container {
-  top: 64px;
+  top: $menu_height;
   bottom: 0;
+}
+
+.board-container {
+  @media screen and (orientation:landscape) {
+    height: calc(100vh - 64px);
+    width: calc(100vh - 64px);
+  }
+  @media screen and (orientation:portrait) {
+    height: calc(100vw);
+    width: calc(100vw);
+  }
+}
+
+.cell {
+  &:not(:last-child) {
+    border-right: 1px solid $white;
+  }
+}
+
+.board__row {
+  &:not(:last-child) {
+    .cell {
+      border-bottom: 1px solid $white;
+    }
+  }
 }

@@ -55,5 +55,8 @@ module.exports = (env = {}) => {
       extensions: ['.js', '.jsx', '.scss'],
     },
     devtool: env.production ? false : 'source-map',
+    devServer: {
+      historyApiFallback: true,
+    },
   };
 };
