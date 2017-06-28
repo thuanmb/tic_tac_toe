@@ -1,16 +1,5 @@
 @import '~NodeModulesPath/tachyons-sass/tachyons';
 
-$menu_height: 64px;
-
-.app-bar {
-  background-color: $blue !important;
-}
-
-.game-container {
-  top: $menu_height;
-  bottom: 0;
-}
-
 .board-container {
   @media screen and (orientation:landscape) {
     height: calc(100vh - 64px);
@@ -33,5 +22,11 @@ $menu_height: 64px;
     .cell {
       border-bottom: 1px solid $white;
     }
+  }
+}
+
+.game-result {
+  i {
+    font-size: 15vw;
   }
 }

@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 import Cell from './cell';
 
 const getIconFontSize = (size) => {
-  let fontSize = 20;
+  let fontSize = 13;
 
   if (size > 3 && size <= 6) {
-    fontSize = 10;
+    fontSize = 6;
   } else if (size > 6 && size <= 9) {
-    fontSize = 7;
-  } else if (size > 9 && size <= 15) {
     fontSize = 4;
+  } else if (size > 9 && size <= 15) {
+    fontSize = 2;
   } else if (size > 15) {
-    fontSize = 3;
+    fontSize = 1;
   }
 
-  return {
-    fontSize: `${fontSize}vw`,
-  };
+  return fontSize;
 };
 
 const renderCells = (rowIndex, size, gameBoardMatrix, cellClickHandler) => {

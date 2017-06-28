@@ -17,6 +17,7 @@
   "dependencies": {
     "html-webpack-plugin": "^2.28.0",
     "material-ui": "^0.18.4",
+    "material-ui-slider-label": "git+https://github.com/tariqwest/material-ui-slider-label.git",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -26,6 +27,8 @@
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-localstorage": "^0.4.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "tachyons-sass": "^4.7.1",

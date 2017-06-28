@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
-import MenuItem from 'material-ui/MenuItem';
-import { Link } from 'react-router';
+import Menu from 'ComponentsPath/menu';
 import Board from './board';
+import GameResultDialog from './game-result-dialog';
 import { createNewGame, playAction } from './actions';
 
 import './styles';
@@ -17,65 +14,77 @@ class Game extends Component {
     gameBoardMatrix: PropTypes.array.isRequired,
     createNewGameHandler: PropTypes.func.isRequired,
     playActionHandler: PropTypes.func.isRequired,
+    gameFinished: PropTypes.bool.isRequired,
+    winner: PropTypes.number.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false,
+      gameResultDialogOpen: true,
     };
   }
 
   componentWillMount() {
+    this.createBoard();
+  }
+
+  createBoard() {
     const { boardSize, createNewGameHandler } = this.props;
     createNewGameHandler(boardSize);
   }
 
-  handleMenuToggle() {
+  handleCloseGameResultDialog() {
     this.setState({
-      menuOpen: !this.state.menuOpen,
+      gameResultDialogOpen: false,
     });
   }
 
   handleCellClick(rowIndex, colIndex) {
-    const { playActionHandler, gameBoardMatrix } = this.props;
+    const {
+      playActionHandler,
+      gameBoardMatrix,
+    } = this.props;
 
     if (gameBoardMatrix[rowIndex][colIndex] === -1) {
       playActionHandler(rowIndex, colIndex);
     }
   }
 
+  handleRestartGame() {
+    this.setState({
+      gameResultDialogOpen: true,
+    });
+
+    this.createBoard();
+  }
+
   render() {
-    const { menuOpen } = this.state;
+    const { gameResultDialogOpen } = this.state;
     const {
       boardSize,
       gameBoardMatrix,
+      gameFinished,
+      winner,
     } = this.props;
     return (
       <div>
-        <AppBar
-          title="Tic Tac Toe"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
-          onLeftIconButtonTouchTap={() => this.handleMenuToggle()}
-          className="app-bar"
-        />
-        <Drawer
-          open={menuOpen}
-          docked={false}
-          onRequestChange={() => this.handleMenuToggle()}
-        >
-          <MenuItem>
-            <Link to="/" className="link dib w-100 black">Home</Link>
-            <Divider />
-          </MenuItem>
-        </Drawer>
-        <article className="game-container absolute w-100 bg-main tc">
+        <Menu />
+        <article className="screen-container absolute w-100 bg-main tc">
           <div className="white board-container dib">
             <Board
               size={boardSize}
               gameBoardMatrix={gameBoardMatrix}
               cellClickHandler={(rowIndex, colIndex) => this.handleCellClick(rowIndex, colIndex)}
             />
+            {gameFinished && (
+              <GameResultDialog
+                open={gameResultDialogOpen && gameFinished}
+                winner={winner}
+                closeHandler={() => this.handleCloseGameResultDialog()}
+                restartGameHandler={() => this.handleRestartGame()}
+              />
+            )}
           </div>
         </article>
       </div>
@@ -85,10 +94,12 @@ class Game extends Component {
 
 const mapStateToProps = ({
   settings: { size: boardSize },
-  game: { boardMatrix: gameBoardMatrix },
+  game: { boardMatrix: gameBoardMatrix, finished: gameFinished, winner },
 }) => ({
   boardSize,
   gameBoardMatrix,
+  gameFinished,
+  winner,
 });
 
 export default connect(mapStateToProps, {

@@ -6,7 +6,10 @@ const Home = () => (
     <article className="vh-100 dt w-100 bg-main">
       <div className="dtc v-mid tc white ph3 ph4-l">
         <h1 className="f6 f2-m f-subheadline-l fw6 tc">Tic Tac Toe!</h1>
-        <Link className="f6 link dim br1 ba ph3 pv2 mb2 dib white" to="/new">New Game</Link>
+        <div className="dib">
+          <Link className="f6 link dim br1 ba ph3 pv2 mb2 db white" to="/new">New Game</Link>
+          <Link className="f6 link dim br1 ba ph3 pv2 mb2 db white" to="/settings">Settings</Link>
+        </div>
       </div>
     </article>
 

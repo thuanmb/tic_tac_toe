@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const getIcon = (value, iconFontSize) => {
   const style = {
-    ...iconFontSize,
+    fontSize: `${iconFontSize}vw`,
     visibility: value >= 0 ? 'visible' : 'hidden',
   };
 
@@ -28,7 +28,7 @@ Cell.propTypes = {
   value: PropTypes.number.isRequired,
   rowIndex: PropTypes.number.isRequired,
   colIndex: PropTypes.number.isRequired,
-  iconFontSize: PropTypes.object.isRequired,
+  iconFontSize: PropTypes.number.isRequired,
   clickHandler: PropTypes.func.isRequired,
 };
 

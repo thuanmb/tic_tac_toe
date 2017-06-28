@@ -1,9 +1,10 @@
 @import '~NodeModulesPath/tachyons-sass/tachyons';
+@import "variables";
 
 #tic-tac-toe-container {
-  color: #ccc;
+  color: $main_color;
 }
 
 .bg-main {
-  background-color: rgb(0, 188, 212);
+  background-color: $bg_main;
 }

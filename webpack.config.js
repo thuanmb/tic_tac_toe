@@ -51,6 +51,8 @@ module.exports = (env = {}) => {
         NodeModulesPath: path.resolve(__dirname, './node_modules'),
         ReducersPath: path.resolve(__dirname, './client/reducers'),
         ComponentsPath: path.resolve(__dirname, './client/components'),
+        UtilsPath: path.resolve(__dirname, './client/utils'),
+        StylesPath: path.resolve(__dirname, './client/styles'),
       },
       extensions: ['.js', '.jsx', '.scss'],
     },
