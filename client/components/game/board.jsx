@@ -51,7 +51,7 @@ const Board = ({ size, gameBoardMatrix, cellClickHandler }) => {
   const rows = renderRows(size, gameBoardMatrix, cellClickHandler);
 
   return (
-    <div className="dt w-100 h-100 pa1 pa3-m pa5-l">
+    <div className="dt w-100 h-100 pa1 pa3-m pa5-l pt0-l pt0-m pt0">
       {rows}
     </div>
   );

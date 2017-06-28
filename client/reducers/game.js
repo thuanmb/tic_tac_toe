@@ -1,4 +1,5 @@
 import { createMatrix, checkGameFinished } from 'UtilsPath';
+import undoable from 'redux-undo';
 import { NEW_GAME, PLAY_ACTION } from './types';
 
 const PLAYER_X = 1;
@@ -41,4 +42,6 @@ const gameReducer = (state = DEFAULT_STATE, action) => {
   }
 };
 
-export default gameReducer;
+const undoableGameReducer = undoable(gameReducer);
+
+export default undoableGameReducer;

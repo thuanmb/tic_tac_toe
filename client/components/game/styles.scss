@@ -2,8 +2,8 @@
 
 .board-container {
   @media screen and (orientation:landscape) {
-    height: calc(100vh - 64px);
-    width: calc(100vh - 64px);
+    height: calc(100vh - 110px);
+    width: calc(100vh - 110px);
   }
   @media screen and (orientation:portrait) {
     height: calc(100vw);
