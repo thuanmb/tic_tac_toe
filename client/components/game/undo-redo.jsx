@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ActionButton from 'ComponentsPath/common/action-button';
 
 const UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }) => (
   <p>
-    <button className="f6 dim br4 ba ph3 pv1 mb2 white bg-transparent b--white" onClick={onUndo} disabled={!canUndo}>
-      Undo
-    </button>
-    <button className="f6 dim br4 ba ph3 pv1 mb2 white bg-transparent b--white ml2" onClick={onRedo} disabled={!canRedo}>
-      Redo
-    </button>
+    <ActionButton onClick={onUndo} disabled={!canUndo}>Undo</ActionButton>
+    <ActionButton onClick={onRedo} disabled={!canRedo} className="ml2">Redo</ActionButton>
   </p>
 );
 

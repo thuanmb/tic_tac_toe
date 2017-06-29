@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Menu from 'ComponentsPath/menu';
+import Screen from 'ComponentsPath/common/screen';
 import Board from './board';
 import GameResultDialog from './game-result-dialog';
 import UndoRedo from './undo-redo';
@@ -82,27 +82,24 @@ class Game extends Component {
       redoHandler,
     } = this.props;
     return (
-      <div>
-        <Menu />
-        <article className="screen-container absolute w-100 bg-main tc">
-          <div className="white board-container dib">
-            <UndoRedo canUndo={canUndo} canRedo={canRedo} onUndo={undoHandler} onRedo={redoHandler} />
-            <Board
-              size={boardSize}
-              gameBoardMatrix={gameBoardMatrix}
-              cellClickHandler={(rowIndex, colIndex) => this.handleCellClick(rowIndex, colIndex)}
+      <Screen title="Tic Tac Toe">
+        <div className="white board-container dib">
+          <UndoRedo canUndo={canUndo} canRedo={canRedo} onUndo={undoHandler} onRedo={redoHandler} />
+          <Board
+            size={boardSize}
+            gameBoardMatrix={gameBoardMatrix}
+            cellClickHandler={(rowIndex, colIndex) => this.handleCellClick(rowIndex, colIndex)}
+          />
+          {gameFinished && (
+            <GameResultDialog
+              open={gameFinished && !forceCloseDialog}
+              winner={winner}
+              closeHandler={() => this.handleCloseGameResultDialog()}
+              restartGameHandler={() => this.handleRestartGame()}
             />
-            {gameFinished && (
-              <GameResultDialog
-                open={gameFinished && !forceCloseDialog}
-                winner={winner}
-                closeHandler={() => this.handleCloseGameResultDialog()}
-                restartGameHandler={() => this.handleRestartGame()}
-              />
-            )}
-          </div>
-        </article>
-      </div>
+          )}
+        </div>
+      </Screen>
     );
   }
 }
