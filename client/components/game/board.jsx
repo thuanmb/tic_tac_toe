@@ -18,7 +18,7 @@ const getIconFontSize = (size) => {
   return fontSize;
 };
 
-const renderCells = (rowIndex, size, gameBoardMatrix, cellClickHandler) => {
+const renderCells = (rowIndex, size, gameBoardMatrix, cellClickHandler, currentPlayerTurn) => {
   const cells = [];
 
   for (let colIndex = 0; colIndex < size; colIndex += 1) {
@@ -30,6 +30,7 @@ const renderCells = (rowIndex, size, gameBoardMatrix, cellClickHandler) => {
         iconFontSize={getIconFontSize(size)}
         value={gameBoardMatrix[rowIndex] ? gameBoardMatrix[rowIndex][colIndex] : -1}
         clickHandler={cellClickHandler}
+        currentPlayerTurn={currentPlayerTurn}
       />);
   }
 
@@ -38,17 +39,17 @@ const renderCells = (rowIndex, size, gameBoardMatrix, cellClickHandler) => {
   );
 };
 
-const renderRows = (size, gameBoardMatrix, cellClickHandler) => {
+const renderRows = (size, gameBoardMatrix, cellClickHandler, currentPlayerTurn) => {
   const rows = [];
   for (let rowIndex = 0; rowIndex < size; rowIndex += 1) {
-    rows.push(renderCells(rowIndex, size, gameBoardMatrix, cellClickHandler));
+    rows.push(renderCells(rowIndex, size, gameBoardMatrix, cellClickHandler, currentPlayerTurn));
   }
 
   return rows;
 };
 
-const Board = ({ size, gameBoardMatrix, cellClickHandler }) => {
-  const rows = renderRows(size, gameBoardMatrix, cellClickHandler);
+const Board = ({ size, gameBoardMatrix, cellClickHandler, currentPlayerTurn }) => {
+  const rows = renderRows(size, gameBoardMatrix, cellClickHandler, currentPlayerTurn);
 
   return (
     <div className="dt w-100 h-100 pa1 pa3-m pa5-l pt0-l pt0-m pt0">
@@ -61,6 +62,7 @@ Board.propTypes = {
   size: PropTypes.number,
   gameBoardMatrix: PropTypes.array.isRequired,
   cellClickHandler: PropTypes.func.isRequired,
+  currentPlayerTurn: PropTypes.number.isRequired,
 };
 
 export default Board;

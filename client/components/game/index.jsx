@@ -15,13 +15,13 @@ class Game extends Component {
     gameBoardMatrix: PropTypes.array.isRequired,
     gameFinished: PropTypes.bool.isRequired,
     winner: PropTypes.number.isRequired,
+    currentPlayerTurn: PropTypes.number.isRequired,
     canUndo: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
     createNewGameHandler: PropTypes.func.isRequired,
     playActionHandler: PropTypes.func.isRequired,
     undoHandler: PropTypes.func.isRequired,
     redoHandler: PropTypes.func.isRequired,
-
   };
 
   constructor(props) {
@@ -80,6 +80,7 @@ class Game extends Component {
       canRedo,
       undoHandler,
       redoHandler,
+      currentPlayerTurn,
     } = this.props;
     return (
       <Screen title="Tic Tac Toe">
@@ -89,6 +90,7 @@ class Game extends Component {
             size={boardSize}
             gameBoardMatrix={gameBoardMatrix}
             cellClickHandler={(rowIndex, colIndex) => this.handleCellClick(rowIndex, colIndex)}
+            currentPlayerTurn={currentPlayerTurn}
           />
           {gameFinished && (
             <GameResultDialog
@@ -106,7 +108,7 @@ class Game extends Component {
 
 const mapStateToProps = ({
   settings: { size: boardSize },
-  game: { present: { boardMatrix: gameBoardMatrix, finished: gameFinished, winner }, past, future },
+  game: { present: { boardMatrix: gameBoardMatrix, finished: gameFinished, winner, currentTurn }, past, future },
 }) => ({
   boardSize,
   gameBoardMatrix,
@@ -114,6 +116,7 @@ const mapStateToProps = ({
   winner,
   canUndo: past.length > 1,
   canRedo: future.length > 0,
+  currentPlayerTurn: currentTurn,
 });
 
 export default connect(mapStateToProps, {

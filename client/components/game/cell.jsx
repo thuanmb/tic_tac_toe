@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const getIcon = (value, iconFontSize) => {
+const getIcon = (value, iconFontSize, currentPlayerTurn) => {
   const style = {
     fontSize: `${iconFontSize}vw`,
     visibility: value >= 0 ? 'visible' : 'hidden',
   };
 
-  if (value > 0) {
+  if (value === 1 || (value < 0 && currentPlayerTurn === 1)) {
     return (
       <i className="material-icons" style={style}>close</i>
     );
@@ -18,9 +18,9 @@ const getIcon = (value, iconFontSize) => {
   );
 };
 
-const Cell = ({ value, rowIndex, colIndex, iconFontSize, clickHandler }) => (
-  <span className="dtc cell tc v-mid pointer" onClick={() => clickHandler(rowIndex, colIndex)}>
-    {getIcon(value, iconFontSize)}
+const Cell = ({ value, rowIndex, colIndex, iconFontSize, clickHandler, currentPlayerTurn }) => (
+  <span className={`dtc cell tc v-mid pointer ${value < 0 ? '' : 'has-value'}`} onClick={() => clickHandler(rowIndex, colIndex)}>
+    {getIcon(value, iconFontSize, currentPlayerTurn)}
   </span>
 );
 
@@ -30,6 +30,7 @@ Cell.propTypes = {
   colIndex: PropTypes.number.isRequired,
   iconFontSize: PropTypes.number.isRequired,
   clickHandler: PropTypes.func.isRequired,
+  currentPlayerTurn: PropTypes.number.isRequired,
 };
 
 export default Cell;
